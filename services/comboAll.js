@@ -4,7 +4,7 @@ let jsonoArray = []
 const combine = (imageResponse) => {
 
     imageResponse.forEach(entry => {
-        if (entry.includes("output")) {
+        if (typeof entry === 'string' && entry.includes("output")) {
             entry = `{ "${entry.split(":")[0].trim()}": ${entry.split(":").slice(1).join(":").trim()} }`;
             entry = convertJson(entry, 0)
         }
