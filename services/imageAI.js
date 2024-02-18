@@ -34,6 +34,7 @@ const imageAi = async (req, res) => {
             }
 
             if (file.mimetype.startsWith('image/')) {
+                console.log("Compressing");
                 const imageBuffer = file.buffer;
                 const promise = compressImages(imageBuffer, file.size);
                 fileProcessingPromises.push(promise);

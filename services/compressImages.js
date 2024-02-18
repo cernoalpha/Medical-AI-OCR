@@ -9,7 +9,6 @@ async function compressImages(imageBuffer, fileSize) {
                 .jpeg({ quality: 70 })
                 .toBuffer({ resolveWithObject: true });
 
-            console.log("Compression Complete");
             return compressedImage.data;
         } else {
             const compressedImage = await sharp(imageBuffer)
@@ -17,7 +16,6 @@ async function compressImages(imageBuffer, fileSize) {
                 .jpeg({ quality: 100 })
                 .toBuffer({ resolveWithObject: true });
 
-            console.log("Compression Complete");
             return compressedImage.data;
         }
     } catch (error) {
