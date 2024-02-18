@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Upload</title>
+<style>
+  .loading {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+  }
+  pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    overflow: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+</style>
+</head>
+<body>
+  <h1>Upload Files</h1>
+  <input type="file" id="fileInput" multiple>
+  <button onclick="uploadFiles()">Upload Files</button>
+  <div class="loading" id="loading">Uploading...</div>
+  <pre id="response"></pre>
+
+  <script>
+    function uploadFiles() {
+      const files = document.getElementById('fileInput').files;
+      const formData = new FormData();
+      
+      for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+      }
+      
+      document.getElementById('loading').style.display = 'block'; 
+      
+      fetch('http://localhost:3001/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Hide loading message
+        document.getElementById('loading').style.display = 'none';
+        
+        // Display response on the page
+        const responsePre = document.getElementById('response');
+        responsePre.textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Hide loading message
+        document.getElementById('loading').style.display = 'none';
+        
+        // Display error message on the page
+        const responsePre = document.getElementById('response');
+        responsePre.textContent = 'Error occurred. Please try again.';
+      });
+    }
+  </script>
+</body>
+</html>
