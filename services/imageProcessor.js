@@ -90,6 +90,7 @@ const processImage = async (files) => {
                 return JSON.parse(result.response.text())
 
             } catch (error) {
+                console.log("Data Loss")
                 return { item, success: false };
             }
         })
