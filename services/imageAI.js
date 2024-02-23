@@ -80,7 +80,6 @@ const imageAi = async (req, res) => {
 
             console.log("Extracting Data")
             const ImageResponses = await processImage(fileData)
-            // console.log(ImageResponses.join())
 
             console.log("Consolidating")
             let [combinedObject, errorResponse] = combine(ImageResponses)
