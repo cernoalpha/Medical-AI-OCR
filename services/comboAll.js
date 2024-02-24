@@ -1,27 +1,14 @@
-
-let errorResponse = [];
-let jsonoArray = []
 const combine = (imageResponse) => {
-
+    let jsonoArray = []
     imageResponse.forEach(entry => {
-        // if (typeof entry === 'string' && entry.includes("output")) {
-        //     entry = `{ "${entry.split(":")[0].trim()}": ${entry.split(":").slice(1).join(":").trim()} }`;
-        //     entry = convertJson(entry, 0)
-        // }
-        // else {
-        //     entry = convertJson(entry, 1)
-        // }
-
-
         if (entry.output) {
             entry = entry.output;
         }
-
         jsonoArray.push(entry)
         
     });
     const response = mergeJSONObjects(jsonoArray)
-    return [response, errorResponse];
+    return response;
 }
 
 function mergeJSONObjects(jsonObjects) {
@@ -113,21 +100,6 @@ function mergeJSONObjects(jsonObjects) {
     });
 
     return mergedData;
-}
-
-const convertJson = (stringifiedJson, type) => {
-    let parsedResponse
-    try {
-        parsedResponse = JSON.parse(stringifiedJson);
-    } catch (error) {
-        console.error("Error parsing JSON: Data Loss");
-        errorResponse.push(stringifiedJson)
-        return {};
-    }
-    if (type === 0) {
-        parsedResponse = parsedResponse.output
-    }
-    return parsedResponse
 }
 
 

@@ -82,18 +82,10 @@ const imageAi = async (req, res) => {
             const ImageResponses = await processImage(fileData)
 
             console.log("Consolidating")
-            let [combinedObject, errorResponse] = combine(ImageResponses)
+            let combinedObject  = combine(ImageResponses)
 
-            if (errorResponse.length === 0) {
-                console.log("Sent")
-                res.status(200).json(combinedObject);
-            }
-            else {
-                console.log("Correcting")
-                const response = await textAi(combinedObject, errorResponse)
-                console.log("Sent")
-                res.status(200).json({ "partiallyCorrectResponse": combinedObject, "attemptedCorrectionResponse": response });
-            }
+            console.log("Sent")
+            res.status(200).json(combinedObject);
         }
 
 
