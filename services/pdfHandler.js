@@ -39,6 +39,7 @@ const processPDF = async (file) => {
         return results;
 
     } catch (error) {
+        console.log(error.message)
         return { success: false, error: error.message };
     }
 };
